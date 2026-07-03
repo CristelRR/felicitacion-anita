@@ -75,9 +75,19 @@ function butterflySVG(palette) {
   </svg>`;
 }
 
+function isMobile() {
+  return window.innerWidth <= 480;
+}
+
 function initSunflowers() {
+  const scale = window.innerWidth <= 360 ? 0.65
+    : window.innerWidth <= 480 ? 0.78
+    : window.innerWidth <= 768 ? 0.9
+    : 1;
+
   document.querySelectorAll('[data-sunflower]').forEach((el) => {
-    const size = Number(el.dataset.sunflower) || 100;
+    const base = Number(el.dataset.sunflower) || 100;
+    const size = Math.round(base * scale);
     const stem = el.dataset.stem !== 'false';
     el.innerHTML = sunflowerSVG(size, stem);
   });
@@ -85,7 +95,8 @@ function initSunflowers() {
 
 function createPetals() {
   const container = document.getElementById('petals');
-  for (let i = 0; i < 30; i++) {
+  const count = isMobile() ? 18 : 30;
+  for (let i = 0; i < count; i++) {
     const petal = document.createElement('div');
     petal.className = 'petal';
     const size = 8 + Math.random() * 10;
@@ -101,7 +112,8 @@ function createPetals() {
 function createSparkles() {
   const container = document.getElementById('sparkles');
   const icons = ['✨', '⭐', '💛'];
-  for (let i = 0; i < 15; i++) {
+  const count = isMobile() ? 8 : 15;
+  for (let i = 0; i < count; i++) {
     const el = document.createElement('div');
     el.className = 'sparkle';
     el.textContent = icons[Math.floor(Math.random() * icons.length)];
@@ -129,10 +141,12 @@ function createButterfly() {
 
 function initButterflies() {
   const container = document.getElementById('butterflies');
-  for (let i = 0; i < 6; i++) container.appendChild(createButterfly());
+  const count = isMobile() ? 4 : 6;
+  const max = isMobile() ? 5 : 8;
+  for (let i = 0; i < count; i++) container.appendChild(createButterfly());
   setInterval(() => {
-    if (container.children.length < 8) container.appendChild(createButterfly());
-  }, 7000);
+    if (container.children.length < max) container.appendChild(createButterfly());
+  }, isMobile() ? 9000 : 7000);
 }
 
 function initConfetti() {
@@ -154,8 +168,9 @@ function initConfetti() {
     particles = [];
     const cx = window.innerWidth / 2;
     const cy = window.innerHeight / 2;
-    for (let i = 0; i < 160; i++) {
-      const angle = (Math.PI * 2 * i) / 160 + Math.random() * 0.5;
+    const total = window.innerWidth <= 480 ? 100 : 160;
+    for (let i = 0; i < total; i++) {
+      const angle = (Math.PI * 2 * i) / total + Math.random() * 0.5;
       const speed = 5 + Math.random() * 10;
       particles.push({
         x: cx, y: cy,
@@ -215,3 +230,9 @@ createPetals();
 createSparkles();
 initButterflies();
 window.addEventListener('load', () => setTimeout(celebrate, 1000));
+
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(initSunflowers, 200);
+});
