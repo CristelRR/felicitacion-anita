@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Feliz Cumpleaños, Anita! 🌻</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="sky"></div>
+  <div class="petals" id="petals" aria-hidden="true"></div>
+
+  <main class="card">
+    <div class="sunflower-field">
+      <div class="sunflower sunflower--left">
+        <div class="sunflower__petals"></div>
+        <div class="sunflower__center"></div>
+        <div class="sunflower__stem"></div>
+        <div class="sunflower__leaf sunflower__leaf--left"></div>
+        <div class="sunflower__leaf sunflower__leaf--right"></div>
+      </div>
+      <div class="sunflower sunflower--center">
+        <div class="sunflower__petals"></div>
+        <div class="sunflower__center"></div>
+        <div class="sunflower__stem"></div>
+        <div class="sunflower__leaf sunflower__leaf--left"></div>
+        <div class="sunflower__leaf sunflower__leaf--right"></div>
+      </div>
+      <div class="sunflower sunflower--right">
+        <div class="sunflower__petals"></div>
+        <div class="sunflower__center"></div>
+        <div class="sunflower__stem"></div>
+        <div class="sunflower__leaf sunflower__leaf--left"></div>
+        <div class="sunflower__leaf sunflower__leaf--right"></div>
+      </div>
+    </div>
+
+    <header class="card__header">
+      <p class="card__eyebrow">Con mucho cariño</p>
+      <h1 class="card__title">¡Feliz Cumpleaños,<br><span>Anita</span>!</h1>
+    </header>
+
+    <section class="card__message">
+      <p>
+        Hoy el sol brilla un poco más, igual que tú.
+        Como los girasoles que siempre buscan la luz,
+        tu alegría ilumina a quienes te rodean.
+      </p>
+      <p>
+        Que este nuevo año de vida te traiga risas,
+        sueños cumplidos y momentos tan cálidos
+        como un campo lleno de girasoles en verano.
+      </p>
+      <p class="card__wish">
+        ¡Que tengas el cumpleaños más bonito! 🌻
+      </p>
+    </section>
+
+    <button class="card__btn" id="celebrateBtn" type="button">
+      <span>¡Celebrar!</span>
+      <span class="card__btn-icon">✨</span>
+    </button>
+  </main>
+
+  <footer class="footer">
+    <p>Hecho con cariño · 2026</p>
+  </footer>
+
+  <canvas id="confetti" aria-hidden="true"></canvas>
+  <script src="script.js"></script>
+</body>
+</html>
