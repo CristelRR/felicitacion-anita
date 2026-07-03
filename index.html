@@ -6,67 +6,68 @@
   <title>¡Feliz Cumpleaños, Anita! 🌻</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="sky"></div>
+  <div class="sky">
+    <div class="cloud cloud--1"></div>
+    <div class="cloud cloud--2"></div>
+    <div class="cloud cloud--3"></div>
+  </div>
+
+  <div class="meadow" aria-hidden="true">
+    <div class="meadow__sf meadow__sf--1" data-sunflower="55" data-stem="false"></div>
+    <div class="meadow__sf meadow__sf--2" data-sunflower="70" data-stem="false"></div>
+    <div class="meadow__sf meadow__sf--3" data-sunflower="48" data-stem="false"></div>
+    <div class="meadow__sf meadow__sf--4" data-sunflower="62" data-stem="false"></div>
+    <div class="meadow__sf meadow__sf--5" data-sunflower="42" data-stem="false"></div>
+    <div class="meadow__sf meadow__sf--6" data-sunflower="50" data-stem="false"></div>
+  </div>
+
+  <div class="butterflies" id="butterflies" aria-hidden="true"></div>
   <div class="petals" id="petals" aria-hidden="true"></div>
+  <div class="sparkles" id="sparkles" aria-hidden="true"></div>
 
   <main class="card">
     <div class="sunflower-field">
-      <div class="sunflower sunflower--left">
-        <div class="sunflower__petals"></div>
-        <div class="sunflower__center"></div>
-        <div class="sunflower__stem"></div>
-        <div class="sunflower__leaf sunflower__leaf--left"></div>
-        <div class="sunflower__leaf sunflower__leaf--right"></div>
-      </div>
-      <div class="sunflower sunflower--center">
-        <div class="sunflower__petals"></div>
-        <div class="sunflower__center"></div>
-        <div class="sunflower__stem"></div>
-        <div class="sunflower__leaf sunflower__leaf--left"></div>
-        <div class="sunflower__leaf sunflower__leaf--right"></div>
-      </div>
-      <div class="sunflower sunflower--right">
-        <div class="sunflower__petals"></div>
-        <div class="sunflower__center"></div>
-        <div class="sunflower__stem"></div>
-        <div class="sunflower__leaf sunflower__leaf--left"></div>
-        <div class="sunflower__leaf sunflower__leaf--right"></div>
-      </div>
+      <div class="sf-wrap sf-wrap--tiny" data-sunflower="75"></div>
+      <div class="sf-wrap sf-wrap--small" data-sunflower="95"></div>
+      <div class="sf-wrap sf-wrap--center" data-sunflower="120"></div>
+      <div class="sf-wrap sf-wrap--small sf-wrap--flip" data-sunflower="95"></div>
+      <div class="sf-wrap sf-wrap--tiny sf-wrap--flip" data-sunflower="75"></div>
     </div>
 
     <header class="card__header">
-      <p class="card__eyebrow">Con mucho cariño</p>
-      <h1 class="card__title">¡Feliz Cumpleaños,<br><span>Anita</span>!</h1>
+      <p class="card__eyebrow">🌻 Con mucho cariño 🌻</p>
+      <h1 class="card__title">¡Feliz Cumpleaños,<br><span>Anita</span>! 🎂</h1>
+      <div class="card__stars">✨ 🦋 ✨</div>
     </header>
 
     <section class="card__message">
       <p>
-        Hoy el sol brilla un poco más, igual que tú.
+        Hoy el sol brilla un poco más, <strong>igual que tú</strong>.
         Como los girasoles que siempre buscan la luz,
         tu alegría ilumina a quienes te rodean.
       </p>
       <p>
-        Que este nuevo año de vida te traiga risas,
+        Que este nuevo año de vida te traiga <strong>risas sin fin</strong>,
         sueños cumplidos y momentos tan cálidos
-        como un campo lleno de girasoles en verano.
+        como un campo lleno de girasoles en verano. 🌞
       </p>
       <p class="card__wish">
-        ¡Que tengas el cumpleaños más bonito! 🌻
+        ¡Que tengas el cumpleaños más bonito del mundo! 🌻🦋
       </p>
     </section>
 
     <button class="card__btn" id="celebrateBtn" type="button">
-      <span>¡Celebrar!</span>
-      <span class="card__btn-icon">✨</span>
+      <span>¡Celebrar con confeti!</span>
+      <span class="card__btn-icon">🎉</span>
     </button>
   </main>
 
   <footer class="footer">
-    <p>Hecho con cariño · 2026</p>
+    <p>Hecho con mucho cariño para ti · 2026 💛</p>
   </footer>
 
   <canvas id="confetti" aria-hidden="true"></canvas>

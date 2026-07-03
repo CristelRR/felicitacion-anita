@@ -7,23 +7,20 @@
 }
 
 :root {
-  --gold: #f5c842;
-  --gold-dark: #e8a317;
-  --sunflower-yellow: #ffd54f;
-  --sunflower-orange: #ffab00;
-  --brown: #5d4037;
+  --gold-dark: #f57f17;
+  --sunflower-yellow: #fdd835;
+  --pink: #ff6b9d;
+  --purple: #ab47bc;
+  --brown: #4e342e;
   --brown-light: #8d6e63;
-  --green: #558b2f;
-  --green-dark: #33691e;
-  --sky-top: #87ceeb;
-  --sky-bottom: #fff8e1;
-  --cream: #fffde7;
-  --shadow: rgba(93, 64, 55, 0.15);
+  --green: #66bb6a;
+  --meadow: #a5d6a7;
+  --meadow-dark: #81c784;
+  --cream: #fff9e6;
+  --shadow: rgba(78, 52, 46, 0.18);
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   min-height: 100vh;
@@ -36,234 +33,270 @@ body {
 .sky {
   position: fixed;
   inset: 0;
-  background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 45%, #c8e6c9 100%);
-  z-index: -2;
+  background: linear-gradient(180deg, #64b5f6 0%, #90caf9 22%, #fff9c4 52%, #c8e6c9 78%, var(--meadow) 100%);
+  z-index: -3;
 }
 
 .sky::before {
   content: '';
   position: absolute;
-  top: 8%;
-  right: 12%;
-  width: 80px;
-  height: 80px;
-  background: radial-gradient(circle, #fff9c4 30%, #ffeb3b 60%, transparent 70%);
+  top: 6%;
+  right: 10%;
+  width: 88px;
+  height: 88px;
+  background: radial-gradient(circle, #fffde7 15%, #ffeb3b 45%, #ffc107 68%, transparent 72%);
   border-radius: 50%;
-  box-shadow: 0 0 60px 20px rgba(255, 235, 59, 0.4);
-  animation: sun-glow 4s ease-in-out infinite alternate;
+  box-shadow: 0 0 70px 25px rgba(255, 235, 59, 0.5);
+  animation: sun-pulse 3s ease-in-out infinite alternate;
 }
 
-@keyframes sun-glow {
-  from { transform: scale(1); opacity: 0.9; }
-  to { transform: scale(1.05); opacity: 1; }
+@keyframes sun-pulse {
+  from { transform: scale(1); }
+  to   { transform: scale(1.06); }
 }
 
-.petals {
+.cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: 50px;
+  animation: cloud-drift linear infinite;
+}
+.cloud::before, .cloud::after {
+  content: '';
+  position: absolute;
+  background: inherit;
+  border-radius: 50%;
+}
+.cloud--1 { width: 100px; height: 36px; top: 12%; left: -120px; animation-duration: 28s; }
+.cloud--1::before { width: 50px; height: 50px; top: -22px; left: 15px; }
+.cloud--1::after  { width: 38px; height: 38px; top: -14px; left: 48px; }
+.cloud--2 { width: 80px; height: 28px; top: 22%; left: -100px; animation-duration: 35s; animation-delay: -10s; opacity: 0.75; }
+.cloud--2::before { width: 40px; height: 40px; top: -18px; left: 10px; }
+.cloud--2::after  { width: 30px; height: 30px; top: -12px; left: 38px; }
+.cloud--3 { width: 70px; height: 24px; top: 8%; left: -90px; animation-duration: 42s; animation-delay: -20s; opacity: 0.65; }
+.cloud--3::before { width: 35px; height: 35px; top: -16px; left: 8px; }
+.cloud--3::after  { width: 28px; height: 28px; top: -10px; left: 32px; }
+
+@keyframes cloud-drift {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(100vw + 200px)); }
+}
+
+.meadow {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 26vh;
+  background: linear-gradient(180deg, transparent, var(--meadow-dark) 35%, #66bb6a 100%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.meadow__sf {
+  position: absolute;
+  bottom: 0;
+  animation: meadow-sway 5s ease-in-out infinite;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+.meadow__sf--1 { left: 2%;  bottom: 6%;  animation-delay: 0s; }
+.meadow__sf--2 { left: 12%; bottom: 0;   animation-delay: 0.4s; }
+.meadow__sf--3 { left: 76%; bottom: 8%;  animation-delay: 0.8s; }
+.meadow__sf--4 { left: 86%; bottom: 1%;  animation-delay: 0.2s; }
+.meadow__sf--5 { left: 48%; bottom: 4%;  animation-delay: 0.6s; opacity: 0.75; }
+.meadow__sf--6 { left: 63%; bottom: 10%; animation-delay: 1s;   opacity: 0.8; }
+
+@keyframes meadow-sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50%       { transform: rotate(3deg); }
+}
+
+/* Girasoles SVG */
+.sunflower-svg {
+  display: block;
+  overflow: visible;
+}
+
+.sunflower-head {
+  animation: head-sway 4s ease-in-out infinite;
+  transform-origin: 50px 50px;
+}
+
+@keyframes head-sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50%       { transform: rotate(3deg); }
+}
+
+.sf-wrap {
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12));
+  animation: head-sway 4s ease-in-out infinite;
+}
+.sf-wrap--tiny   { transform: scale(0.6) rotate(-6deg);  animation-delay: 0.2s; }
+.sf-wrap--small  { transform: scale(0.82) rotate(-3deg); animation-delay: 0.5s; }
+.sf-wrap--center { transform: scale(1); z-index: 2; }
+.sf-wrap--flip   { transform: scale(0.82) rotate(3deg) scaleX(-1); }
+.sf-wrap--tiny.sf-wrap--flip { transform: scale(0.6) rotate(6deg) scaleX(-1); }
+
+.sunflower-field {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 0;
+  height: 200px;
+  margin-bottom: -1rem;
+}
+
+/* Mariposas SVG */
+.butterflies {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 0;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.butterfly {
+  position: absolute;
+  left: -60px;
+  transform: scale(var(--bf-scale, 1));
+  animation: butterfly-fly linear infinite;
+}
+
+.butterfly-svg {
+  display: block;
+  overflow: visible;
+}
+
+.wing--lt, .wing--lb, .wing--rt, .wing--rb {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.butterfly-wings {
+  animation: wings-flap 0.18s ease-in-out infinite alternate;
+  transform-origin: 26px 22px;
+}
+
+@keyframes wings-flap {
+  from { transform: scaleY(1) rotate(0deg); }
+  to   { transform: scaleY(0.82) rotate(2deg); }
+}
+
+@keyframes butterfly-fly {
+  0%   { left: -60px;  transform: translateY(0) scale(var(--bf-scale, 1)); opacity: 0; }
+  5%   { opacity: 1; }
+  20%  { transform: translateY(-12vh) scale(var(--bf-scale, 1)); }
+  45%  { transform: translateY(4vh) scale(var(--bf-scale, 1)); }
+  70%  { transform: translateY(-8vh) scale(var(--bf-scale, 1)); }
+  95%  { opacity: 1; }
+  100% { left: 105vw; transform: translateY(2vh) scale(var(--bf-scale, 1)); opacity: 0; }
+}
+
+.petals, .sparkles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
   overflow: hidden;
 }
 
 .petal {
   position: absolute;
   top: -20px;
-  width: 12px;
-  height: 16px;
-  background: var(--sunflower-yellow);
-  border-radius: 50% 50% 50% 0;
-  opacity: 0.7;
+  background: linear-gradient(135deg, #ffeb3b, #fdd835);
+  border-radius: 50% 50% 50% 10%;
+  opacity: 0.85;
   animation: fall linear infinite;
 }
 
+.sparkle {
+  position: absolute;
+  animation: sparkle-float 3s ease-in-out infinite;
+  opacity: 0;
+}
+
 @keyframes fall {
-  0% {
-    transform: translateY(-20px) rotate(0deg) translateX(0);
-    opacity: 0;
-  }
-  10% { opacity: 0.7; }
-  90% { opacity: 0.5; }
-  100% {
-    transform: translateY(100vh) rotate(720deg) translateX(80px);
-    opacity: 0;
-  }
+  0%   { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.85; }
+  100% { transform: translateY(105vh) rotate(540deg) translateX(60px); opacity: 0; }
+}
+
+@keyframes sparkle-float {
+  0%, 100% { opacity: 0; transform: scale(0.6); }
+  50%       { opacity: 1; transform: scale(1.1); }
 }
 
 main.card {
   position: relative;
-  z-index: 1;
-  max-width: 520px;
-  margin: 2rem auto 1rem;
-  padding: 0 1.25rem;
+  z-index: 3;
+  max-width: 540px;
+  margin: 1.5rem auto 1rem;
+  padding: 0 1rem;
   animation: card-enter 1s ease-out;
 }
 
 @keyframes card-enter {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.sunflower-field {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 0.5rem;
-  height: 200px;
-  margin-bottom: -1rem;
-}
-
-.sunflower {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.sunflower--left { transform: scale(0.75) rotate(-8deg); }
-.sunflower--center { transform: scale(1); z-index: 2; }
-.sunflower--right { transform: scale(0.8) rotate(8deg); }
-
-.sunflower__petals {
-  width: 90px;
-  height: 90px;
-  position: relative;
-  animation: sway 3s ease-in-out infinite;
-}
-
-.sunflower--left .sunflower__petals { animation-delay: 0.3s; }
-.sunflower--right .sunflower__petals { animation-delay: 0.6s; }
-
-@keyframes sway {
-  0%, 100% { transform: rotate(-3deg); }
-  50% { transform: rotate(3deg); }
-}
-
-.sunflower__petals::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-conic-gradient(
-    from 0deg,
-    var(--sunflower-yellow) 0deg 18deg,
-    var(--sunflower-orange) 18deg 36deg
-  );
-  border-radius: 50%;
-  box-shadow: 0 4px 12px var(--shadow);
-}
-
-.sunflower__center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 36px;
-  height: 36px;
-  background: radial-gradient(circle at 30% 30%, var(--brown-light), var(--brown));
-  border-radius: 50%;
-  z-index: 1;
-}
-
-.sunflower__center::after {
-  content: '';
-  position: absolute;
-  inset: 6px;
-  background: repeating-radial-gradient(
-    circle,
-    transparent 0 2px,
-    rgba(0,0,0,0.08) 2px 4px
-  );
-  border-radius: 50%;
-}
-
-.sunflower__stem {
-  width: 6px;
-  height: 70px;
-  background: linear-gradient(90deg, var(--green-dark), var(--green));
-  border-radius: 3px;
-  margin-top: -8px;
-}
-
-.sunflower__leaf {
-  position: absolute;
-  bottom: 30px;
-  width: 28px;
-  height: 14px;
-  background: var(--green);
-  border-radius: 0 70% 0 70%;
-}
-
-.sunflower__leaf--left {
-  left: -18px;
-  transform: rotate(-30deg);
-}
-
-.sunflower__leaf--right {
-  right: -18px;
-  transform: rotate(30deg) scaleX(-1);
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .card__header {
   text-align: center;
-  background: var(--cream);
-  border-radius: 24px 24px 0 0;
+  background: linear-gradient(180deg, #fffef5 0%, var(--cream) 100%);
+  border-radius: 28px 28px 0 0;
   padding: 2rem 1.5rem 1.25rem;
-  box-shadow: 0 -4px 20px var(--shadow);
-  border: 2px solid rgba(245, 200, 66, 0.4);
+  box-shadow: 0 -6px 30px var(--shadow);
+  border: 3px solid rgba(255, 193, 7, 0.5);
   border-bottom: none;
 }
 
 .card__eyebrow {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
+  font-size: 0.9rem;
   color: var(--gold-dark);
-  font-weight: 600;
+  font-weight: 800;
   margin-bottom: 0.5rem;
 }
 
 .card__title {
   font-family: 'Dancing Script', cursive;
-  font-size: clamp(2.4rem, 8vw, 3.2rem);
+  font-size: clamp(2.6rem, 9vw, 3.6rem);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.15;
   color: var(--brown);
 }
 
 .card__title span {
-  color: var(--gold-dark);
-  display: inline-block;
-  animation: name-shine 2.5s ease-in-out infinite;
+  background: linear-gradient(135deg, var(--gold-dark), #ff9800, var(--pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-@keyframes name-shine {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.03); }
+.card__stars {
+  margin-top: 0.6rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.5rem;
 }
 
 .card__message {
   background: var(--cream);
   padding: 1.25rem 1.75rem 1.75rem;
-  border-left: 2px solid rgba(245, 200, 66, 0.4);
-  border-right: 2px solid rgba(245, 200, 66, 0.4);
+  border-left: 3px solid rgba(255, 193, 7, 0.5);
+  border-right: 3px solid rgba(255, 193, 7, 0.5);
   text-align: center;
-  line-height: 1.75;
-  font-size: 1.05rem;
+  line-height: 1.8;
+  font-size: 1.08rem;
 }
 
-.card__message p + p {
-  margin-top: 1rem;
-}
+.card__message strong { color: var(--gold-dark); }
+.card__message p + p { margin-top: 1rem; }
 
 .card__wish {
   font-family: 'Dancing Script', cursive;
-  font-size: 1.5rem;
+  font-size: 1.65rem;
   font-weight: 700;
   color: var(--gold-dark);
   margin-top: 1.25rem !important;
@@ -273,49 +306,40 @@ main.card {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
   width: 100%;
-  padding: 1rem 1.5rem;
+  padding: 1.1rem 1.5rem;
   font-family: 'Nunito', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--brown);
-  background: linear-gradient(135deg, var(--gold) 0%, var(--sunflower-orange) 100%);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, #ff9800, #ffc107, #ff6b9d);
+  background-size: 200% 200%;
   border: none;
-  border-radius: 0 0 24px 24px;
+  border-radius: 0 0 28px 28px;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(232, 163, 23, 0.35);
-  transition: transform 0.2s, box-shadow 0.2s;
-  border: 2px solid rgba(245, 200, 66, 0.4);
+  box-shadow: 0 8px 28px rgba(255, 152, 0, 0.4);
+  border: 3px solid rgba(255, 193, 7, 0.5);
   border-top: none;
+  animation: btn-glow 3s ease infinite;
+  transition: transform 0.2s;
 }
 
-.card__btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(232, 163, 23, 0.45);
+@keyframes btn-glow {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
 }
 
-.card__btn:active {
-  transform: translateY(0);
-}
-
-.card__btn-icon {
-  font-size: 1.3rem;
-  animation: sparkle 1.5s ease-in-out infinite;
-}
-
-@keyframes sparkle {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(1.2) rotate(15deg); }
-}
+.card__btn:hover { transform: translateY(-2px); }
 
 .footer {
   text-align: center;
   padding: 1.5rem;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: var(--brown-light);
+  font-weight: 600;
   position: relative;
-  z-index: 1;
+  z-index: 3;
 }
 
 #confetti {
@@ -326,21 +350,6 @@ main.card {
 }
 
 @media (max-width: 480px) {
-  .sunflower-field {
-    height: 160px;
-  }
-
-  .sunflower__petals {
-    width: 70px;
-    height: 70px;
-  }
-
-  .sunflower__center {
-    width: 28px;
-    height: 28px;
-  }
-
-  .sunflower__stem {
-    height: 50px;
-  }
+  .sunflower-field { height: 165px; }
+  .meadow__sf--5, .meadow__sf--6 { display: none; }
 }
